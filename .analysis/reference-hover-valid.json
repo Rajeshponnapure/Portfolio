@@ -1,0 +1,110 @@
+[
+  {
+    "label": "project",
+    "before": {
+      "text": "Lumi AI CameraDesigning a multimodal AI that lets users point their camera at the world and talk to it. We turned live v",
+      "transform": "none",
+      "bg": "rgb(26, 28, 29)",
+      "shadow": "none",
+      "filter": "none",
+      "opacity": "1",
+      "x": 290,
+      "y": 516.390625,
+      "w": 280,
+      "h": 344
+    },
+    "after": {
+      "text": "Lumi AI CameraDesigning a multimodal AI that lets users point their camera at the world and talk to it. We turned live v",
+      "transform": "none",
+      "bg": "rgb(26, 28, 29)",
+      "shadow": "none",
+      "filter": "none",
+      "opacity": "1",
+      "x": 290,
+      "y": 516.390625,
+      "w": 280,
+      "h": 344
+    }
+  },
+  {
+    "label": "media",
+    "before": {
+      "text": "View details",
+      "transform": "none",
+      "bg": "rgb(39, 43, 45)",
+      "shadow": "none",
+      "filter": "none",
+      "opacity": "1",
+      "x": 926.25,
+      "y": 955.640625,
+      "w": 84.421875,
+      "h": 32
+    },
+    "after": {
+      "text": "View details",
+      "transform": "none",
+      "bg": "rgb(39, 43, 45)",
+      "shadow": "none",
+      "filter": "none",
+      "opacity": "1",
+      "x": 926.25,
+      "y": 955.640625,
+      "w": 84.421875,
+      "h": 32
+    }
+  },
+  {
+    "label": "contact",
+    "before": {
+      "text": "160+ sessions1:1 Mentorship",
+      "transform": "none",
+      "bg": "rgba(0, 0, 0, 0)",
+      "shadow": "none",
+      "filter": "none",
+      "opacity": "1",
+      "x": 787.109375,
+      "y": 459.578125,
+      "w": 146.40625,
+      "h": 44
+    },
+    "after": {
+      "text": "160+ sessions1:1 Mentorship",
+      "transform": "none",
+      "bg": "rgba(0, 0, 0, 0)",
+      "shadow": "none",
+      "filter": "none",
+      "opacity": "1",
+      "x": 787.109375,
+      "y": 459.578125,
+      "w": 146.40625,
+      "h": 44
+    }
+  },
+  {
+    "label": "nav",
+    "before": {
+      "text": "Projects",
+      "transform": "none",
+      "bg": "rgba(0, 0, 0, 0)",
+      "shadow": "none",
+      "filter": "none",
+      "opacity": "1",
+      "x": 684.015625,
+      "y": 46,
+      "w": 36,
+      "h": 36
+    },
+    "after": {
+      "text": "Projects",
+      "transform": "none",
+      "bg": "rgba(0, 0, 0, 0)",
+      "shadow": "none",
+      "filter": "none",
+      "opacity": "1",
+      "x": 684.015625,
+      "y": 46,
+      "w": 36,
+      "h": 36
+    }
+  }
+]
