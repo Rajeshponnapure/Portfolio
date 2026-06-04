@@ -3,15 +3,16 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'fram
 import { useOs } from '../store';
 import { PROFILE } from '../data/content';
 import { smoothScrollTo } from '../lib/smoothScroll';
+import { NavIcon } from './Icons';
 
 const EASE = [0.23, 1, 0.32, 1] as const;
 const NAV = [
-  { id: 'home', glyph: '⌂', label: 'Home' },
-  { id: 'about', glyph: '◆', label: 'About' },
-  { id: 'projects', glyph: '▥', label: 'Work' },
-  { id: 'arsenal', glyph: '◎', label: 'Stack' },
-  { id: 'journey', glyph: '◷', label: 'Journey' },
-  { id: 'connect', glyph: '✦', label: 'Connect' },
+  { id: 'home', icon: 'home', label: 'Home' },
+  { id: 'about', icon: 'about', label: 'About' },
+  { id: 'projects', icon: 'work', label: 'Work' },
+  { id: 'arsenal', icon: 'stack', label: 'Stack' },
+  { id: 'journey', icon: 'journey', label: 'Journey' },
+  { id: 'connect', icon: 'connect', label: 'Connect' },
 ];
 const DISPLAY = 'P. GNANA RAJESWARA REDDY';
 
@@ -80,7 +81,7 @@ export function Lock() {
         <i />
         {NAV.map((item) => (
           <button key={item.id} aria-label={item.label} title={item.label} onClick={() => smoothScrollTo(item.id)}>
-            <span aria-hidden="true">{item.glyph}</span>
+            <NavIcon name={item.icon} className="nav-ico" />
             <em className="nav-tip">{item.label}</em>
           </button>
         ))}

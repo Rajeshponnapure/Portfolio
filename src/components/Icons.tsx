@@ -1,3 +1,71 @@
+/** Monoline stroke icons for the hero navigation. stroke inherits from `color`. */
+export function NavIcon({ name, className }: { name: string; className?: string }) {
+  const common = {
+    className,
+    viewBox: '0 0 24 24',
+    fill: 'none' as const,
+    stroke: 'currentColor' as const,
+    strokeWidth: 1.7,
+    strokeLinecap: 'round' as const,
+    strokeLinejoin: 'round' as const,
+    'aria-hidden': true,
+  };
+  switch (name) {
+    case 'home':
+      return (
+        <svg {...common}>
+          <path d="M4 11 12 4l8 7" />
+          <path d="M6 9.6V19.5h12V9.6" />
+          <path d="M10 19.5v-4.6h4v4.6" />
+        </svg>
+      );
+    case 'about':
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="8" r="3.4" />
+          <path d="M5.6 19.4a6.4 6.4 0 0 1 12.8 0" />
+        </svg>
+      );
+    case 'work':
+      return (
+        <svg {...common}>
+          <rect x="3.8" y="3.8" width="6.6" height="6.6" rx="1.8" />
+          <rect x="13.6" y="3.8" width="6.6" height="6.6" rx="1.8" />
+          <rect x="3.8" y="13.6" width="6.6" height="6.6" rx="1.8" />
+          <rect x="13.6" y="13.6" width="6.6" height="6.6" rx="1.8" />
+        </svg>
+      );
+    case 'stack':
+      return (
+        <svg {...common}>
+          <path d="M12 3.6 3.5 8 12 12.4 20.5 8 12 3.6Z" />
+          <path d="M3.7 12.3 12 16.7l8.3-4.4" />
+          <path d="M3.7 16.3 12 20.7l8.3-4.4" />
+        </svg>
+      );
+    case 'journey':
+      return (
+        <svg {...common}>
+          <circle cx="6.2" cy="17.8" r="2" />
+          <circle cx="17.8" cy="6.2" r="2" />
+          <path d="M8.2 17.8h3.6A4 4 0 0 0 15.8 13.8V8.4" />
+        </svg>
+      );
+    case 'connect':
+      return (
+        <svg {...common}>
+          <circle cx="6.2" cy="12" r="2.2" />
+          <circle cx="17.6" cy="6.2" r="2.2" />
+          <circle cx="17.6" cy="17.8" r="2.2" />
+          <path d="M8.2 11 15.4 7.1" />
+          <path d="M8.2 13 15.4 16.9" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
 /** Minimal monoline brand glyphs for the Connect browser. fill inherits from `color`. */
 export function BrandIcon({ name, className }: { name: string; className?: string }) {
   const common = { className, viewBox: '0 0 24 24', fill: 'currentColor' as const, 'aria-hidden': true };
