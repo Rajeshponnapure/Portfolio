@@ -420,7 +420,7 @@ Distributed under the **MIT License**. See `LICENSE` for more information.
 
 **Built different. Shipped real.**
 
-[🌐 Portfolio](https://rajeshponnapure.dev) • [💼 LinkedIn](https://linkedin.com/in/gnanarajeswarareddy) • [🐙 GitHub](https://github.com/Rajeshponnapure) • [📸 Instagram](https://instagram.com/_rajeshponnapureddy_)
+[🌐 Portfolio](https://rajeshponnapureddy.vercel.app) • [💼 LinkedIn](https://linkedin.com/in/gnanarajeswarareddy) • [🐙 GitHub](https://github.com/Rajeshponnapure) • [📸 Instagram](https://instagram.com/_rajeshponnapureddy_)
 
 ---
 
