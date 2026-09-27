@@ -79,7 +79,7 @@
 ```yaml
 location: Hyderabad, India
 email: gnanarajeswarareddy1607@gmail.com
-phone: +91-XXXXXXXXXX
+phone: +91-9381265797
 github: @Rajeshponnapure
 linkedin: /in/gnanarajeswarareddy
 instagram: @_rajeshponnapureddy_
