@@ -24,6 +24,10 @@ export const PROFILE = {
     'I build intelligent systems at the edge of product, code and automation — from local-first AI assistants and multi-agent command surfaces to realtime communication, smart-city telemetry and production-grade full-stack platforms.',
     'Before the code, there was a story. I spent years writing and posting fiction in my native language — that instinct for narrative is now wired into how I design products and interfaces.',
   ],
+  // contact details
+  phone: '+91-9381265797',
+  email: 'gnanarajeswarareddy1607@gmail.com',
+  location: 'Jammalamadugu, AndhraPradesh, India',
   // non-technical / human side
   facets: [
     { k: 'Story writer', v: 'Years of original fiction posted in my native language' },

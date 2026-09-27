@@ -1,66 +1,74 @@
-import { useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { useEffect, Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useOs } from './store';
-import { Background } from './components/Background';
-import { Cursor } from './components/Cursor';
-import { Boot } from './components/Boot';
-import { Lock } from './components/Lock';
-import { SoundToggle } from './components/SoundToggle';
-import { About } from './sections/About';
-import { Projects } from './sections/Projects';
-import { Arsenal } from './sections/Arsenal';
-import { Journey } from './sections/Journey';
-import { Connect } from './sections/Connect';
-import { PROFILE } from './data/content';
-import { initSmoothScroll, pauseSmoothScroll, resumeSmoothScroll, smoothScrollTo } from './lib/smoothScroll';
+import { Layout } from './components/Layout';
+import { initSmoothScroll, pauseSmoothScroll, resumeSmoothScroll } from './lib/smoothScroll';
+import { useWebVitals, useErrorTracking } from './hooks/usePerformanceMonitoring';
+import { SkipLink, useFocusVisible, useReducedMotion } from './hooks/useAccessibility';
+
+const HomePage = lazy(() => import('./pages/HomePage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
+const ArsenalPage = lazy(() => import('./pages/ArsenalPage'));
+const JourneyPage = lazy(() => import('./pages/JourneyPage'));
+const ConnectPage = lazy(() => import('./pages/ConnectPage'));
+
+function LoadingFallback() {
+  return (
+    <div className="loading-fallback" style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '50vh',
+      color: 'var(--muted)',
+      fontFamily: 'var(--font-mono, "JetBrains Mono", monospace)',
+      fontSize: '14px'
+    }}>
+      Loading…
+    </div>
+  );
+}
 
 function App() {
-  const phase = useOs((s) => s.phase);
+  const { phase, login } = useOs();
+
+  useWebVitals();
+  useErrorTracking();
+  useFocusVisible();
+  useReducedMotion();
 
   useEffect(() => {
     initSmoothScroll();
   }, []);
 
-  // freeze scroll while the boot intro plays
+  // Handle lock screen scroll - allow scrolling on home page for parallax
   useEffect(() => {
-    if (phase === 'boot') {
-      document.body.style.overflow = 'hidden';
-      pauseSmoothScroll();
+    if (phase === 'lock') {
+      document.body.style.overflow = '';
+      resumeSmoothScroll();
     } else {
       document.body.style.overflow = '';
       resumeSmoothScroll();
     }
   }, [phase]);
 
-  // logging in glides the user down into the desktop
-  useEffect(() => {
-    if (phase === 'desktop') smoothScrollTo('projects');
-  }, [phase]);
-
   return (
-    <>
-      <Cursor />
-      <Background />
-
-      <AnimatePresence>{phase === 'boot' && <Boot key="boot" />}</AnimatePresence>
-
-      <main className="desktop">
-        <Lock />
-        <About />
-        <Projects />
-        <Arsenal />
-        <Journey />
-        <Connect />
-        <footer className="foot">
-          <div className="sig mono">
-            {PROFILE.fullName} <b>· RAJESH·OS</b>
-          </div>
-          <div className="copy">Designed with logic, code and a lot of chai · © 2026</div>
-        </footer>
-      </main>
-
-      <SoundToggle />
-    </>
+    <BrowserRouter>
+      <SkipLink target="#main-content" />
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="projects" element={<ProjectsPage />} />
+            <Route path="arsenal" element={<ArsenalPage />} />
+            <Route path="journey" element={<JourneyPage />} />
+            <Route path="connect" element={<ConnectPage />} />
+          </Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
 }
 

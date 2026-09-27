@@ -1,0 +1,9 @@
+# Robots.txt for Rajesh OS Portfolio
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://rajeshponnapure.dev/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 10

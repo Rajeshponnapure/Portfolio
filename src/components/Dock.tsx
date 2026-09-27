@@ -1,35 +1,33 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useOs } from '../store';
 import { DOCK } from '../data/content';
-import { smoothScrollTo } from '../lib/smoothScroll';
 
-/** macOS-style dock with proximity magnification, scroll-spy and smooth-scroll. */
+/** macOS-style dock with proximity magnification and React Router navigation. */
 export function Dock() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const phase = useOs((s) => s.phase);
   const activeApp = useOs((s) => s.activeApp);
   const setActiveApp = useOs((s) => s.setActiveApp);
   const navRef = useRef<HTMLElement>(null);
 
+  // Update active app based on current route
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) setActiveApp(entry.target.id);
-        }
-      },
-      { rootMargin: '-45% 0px -45% 0px' },
-    );
-    for (const app of DOCK) {
-      const el = document.getElementById(app.id);
-      if (el) observer.observe(el);
+    const path = location.pathname.slice(1) || 'home';
+    setActiveApp(path);
+  }, [location, setActiveApp]);
+
+  if (phase === 'lock') return null;
+
+  const go = (id: string) => {
+    if (id === 'home') {
+      navigate('/');
+    } else {
+      navigate(`/${id}`);
     }
-    return () => observer.disconnect();
-  }, [setActiveApp]);
-
-  if (phase === 'boot') return null;
-
-  const go = (id: string) => smoothScrollTo(id);
+  };
 
   // proximity magnification: scale each icon by its distance from the cursor
   const magnify = (clientX: number) => {

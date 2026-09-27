@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 interface NodePoint {
   x: number;
@@ -23,8 +24,15 @@ function createNodes(width: number, height: number): NodePoint[] {
 
 export function Background() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const reducedMotion = useReducedMotion();
+  const [staticDraw, setStaticDraw] = useState(false);
 
   useEffect(() => {
+    if (reducedMotion) {
+      setStaticDraw(true);
+      return;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -138,7 +146,44 @@ export function Background() {
       window.removeEventListener('resize', resize);
       window.removeEventListener('pointermove', onPointer);
     };
-  }, []);
+  }, [reducedMotion]);
+
+  // Draw static version for reduced motion
+  useEffect(() => {
+    if (!reducedMotion) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.7);
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const nodes = createNodes(width, height);
+    ctx.clearRect(0, 0, width, height);
+
+    // Static radial gradient
+    const bg = ctx.createRadialGradient(width / 2, height / 2, 20, width / 2, height / 2, Math.max(width, height) * 0.8);
+    bg.addColorStop(0, 'rgba(67, 224, 255, 0.15)');
+    bg.addColorStop(0.28, 'rgba(168, 85, 247, 0.08)');
+    bg.addColorStop(1, 'rgba(5, 6, 10, 0)');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, width, height);
+
+    // Static nodes
+    for (const n of nodes) {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${n.hue}, 95%, 68%, 0.3)`;
+      ctx.fill();
+    }
+  }, [reducedMotion]);
 
   return (
     <>
