@@ -34,7 +34,7 @@ export default {
       'Referrer-Policy': 'strict-origin-when-cross-origin',
     },
   },
-  preview: { port: 4173 },
+  preview: { port: 5173 },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'zustand', 'lenis'],
   },
