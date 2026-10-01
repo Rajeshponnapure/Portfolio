@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { NavIcon } from './Icons';
 import { PROFILE } from '../data/content';
@@ -15,6 +15,7 @@ const NAV = [
 
 export function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
   const reducedMotion = useReducedMotion();
 
   return (
@@ -26,7 +27,7 @@ export function Header() {
       role="banner"
     >
       <nav className="header-nav" aria-label="Main navigation">
-        <button className="header-brand" onClick={() => window.location.href = '/'} aria-label="Home">
+        <button className="header-brand" onClick={() => navigate('/')} aria-label="Home">
           <span className="header-brand-mark">R</span>
           <b>{PROFILE.short} Reddy</b>
         </button>
@@ -35,7 +36,8 @@ export function Header() {
             <li key={item.id}>
               <button
                 className={`header-link ${location.pathname === item.path || (item.path === '/' && location.pathname === '/') ? 'active' : ''}`}
-                onClick={() => window.location.href = item.path}
+                onClick={() => navigate(item.path)}
+                aria-label={item.label}
                 aria-current={location.pathname === item.path || (item.path === '/' && location.pathname === '/') ? 'page' : undefined}
               >
                 <NavIcon name={item.icon} className="header-ico" aria-hidden="true" />

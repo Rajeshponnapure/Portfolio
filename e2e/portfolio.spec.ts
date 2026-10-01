@@ -9,7 +9,7 @@ test.describe('Portfolio', () => {
 
   test('navigation works', async ({ page }) => {
     await page.goto('/')
-    await page.click('text=Projects')
+    await page.getByRole('button', { name: 'Projects', exact: true }).click()
     await expect(page).toHaveURL(/.*projects/)
     await expect(page.locator('text=Mission Manifest')).toBeVisible()
   })
