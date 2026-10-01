@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { initSmoothScroll } from './lib/smoothScroll';
 import { useWebVitals, useErrorTracking } from './hooks/usePerformanceMonitoring';
-import { SkipLink, useFocusVisible, useReducedMotion } from './hooks/useAccessibility';
+import { SkipLink, useFocusVisible } from './hooks/useAccessibility';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -32,7 +32,6 @@ function App() {
   useWebVitals();
   useErrorTracking();
   useFocusVisible();
-  useReducedMotion();
 
   useEffect(() => {
     initSmoothScroll();

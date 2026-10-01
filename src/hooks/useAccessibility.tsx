@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useEffect, useRef } from 'react';
 
 /** Focus trap for modals/dialogs */
@@ -125,21 +126,6 @@ export function useKeyboardNavigation() {
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
-}
-
-/** Reduced motion detection */
-export function useReducedMotion(): boolean {
-  const [reduced, setReduced] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReduced(mediaQuery.matches);
-    const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, []);
-
-  return reduced;
 }
 
 /** Focus visible polyfill for better keyboard focus styles */

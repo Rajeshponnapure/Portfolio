@@ -20,7 +20,7 @@ export function useWebVitals() {
           }
         });
         lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
-      } catch (e) {
+      } catch {
         // LCP not supported
       }
 
@@ -34,7 +34,7 @@ export function useWebVitals() {
           });
         });
         fidObserver.observe({ type: 'first-input', buffered: true });
-      } catch (e) {
+      } catch {
         // FID not supported
       }
 
@@ -51,7 +51,7 @@ export function useWebVitals() {
           console.log('[CLS]', clsValue.toFixed(4));
         });
         clsObserver.observe({ type: 'layout-shift', buffered: true });
-      } catch (e) {
+      } catch {
         // CLS not supported
       }
 
@@ -67,7 +67,7 @@ export function useWebVitals() {
           });
         });
         navObserver.observe({ type: 'navigation', buffered: true });
-      } catch (e) {
+      } catch {
         // Navigation timing not supported
       }
     }
@@ -83,7 +83,7 @@ export function useWebVitals() {
         });
       });
       longTaskObserver.observe({ type: 'longtask', buffered: true });
-    } catch (e) {
+    } catch {
       // Long tasks not supported
     }
 
@@ -152,7 +152,7 @@ export function usePerformanceMarks() {
         if (entries.length > 0) {
           console.log(`[Measure] ${name}:`, Math.round(entries[entries.length - 1].duration), 'ms');
         }
-      } catch (e) {
+      } catch {
         // Measure failed
       }
     }
