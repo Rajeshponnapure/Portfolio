@@ -4,18 +4,23 @@ import { PROJECTS } from '../data/projects';
 import type { Project } from '../data/projects';
 import { CATEGORIES, CATEGORY_ORDER } from '../data/content';
 import { RevealText } from '../components/RevealText';
+import { Picture } from '../components/OptimizedImage';
 
-function ProjectCard({ p }: { p: Project }) {
+// Tilt + spring physics only make sense with a real hover-capable pointer.
+const CAN_HOVER = typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+function ProjectCard({ p, dup = false }: { p: Project; dup?: boolean }) {
   const meta = CATEGORIES[p.cat];
   const rx = useSpring(useMotionValue(0), { stiffness: 160, damping: 16 });
   const ry = useSpring(useMotionValue(0), { stiffness: 160, damping: 16 });
 
   return (
     <motion.article
-      className="proj-card"
+      className={`proj-card${dup ? ' dup' : ''}`}
+      aria-hidden={dup || undefined}
       style={{ rotateX: rx, rotateY: ry, transformPerspective: 900, '--h': meta.hue } as React.CSSProperties}
-      whileHover={{ y: -10 }}
-      onMouseMove={(e) => {
+      whileHover={CAN_HOVER ? { y: -10 } : undefined}
+      onMouseMove={!CAN_HOVER ? undefined : (e) => {
         const rect = e.currentTarget.getBoundingClientRect();
         const px = (e.clientX - rect.left) / rect.width - 0.5;
         const py = (e.clientY - rect.top) / rect.height - 0.5;
@@ -30,7 +35,7 @@ function ProjectCard({ p }: { p: Project }) {
       }}
     >
       <div className="proj-visual" data-cat={p.cat}>
-        <img src={p.image} alt={`${p.name} project visual`} loading="lazy" decoding="async" />
+        <Picture kind="projects" name={p.image} width={800} height={450} sizes="358px" alt={`${p.name} project visual`} />
       </div>
       <span className="proj-id mono">{p.id}</span>
       <span className="proj-cat mono">{meta.label}</span>
@@ -46,11 +51,11 @@ function ProjectCard({ p }: { p: Project }) {
   );
 }
 
-function buildTrack(arr: Project[]): Project[] {
+/** One real copy plus one decorative copy (`dup`) that makes the CSS marquee loop seamlessly. */
+function buildTrack(arr: Project[]): { p: Project; dup: boolean }[] {
   if (arr.length === 0) return [];
-  const filled: Project[] = [];
-  while (filled.length < 8) filled.push(...arr);
-  return [...filled, ...filled];
+  const base = arr.length >= 5 ? arr : [...arr, ...arr, ...arr];
+  return [...base.map((p) => ({ p, dup: false })), ...base.map((p) => ({ p, dup: true }))];
 }
 
 export function Projects() {
@@ -102,16 +107,16 @@ export function Projects() {
           <div className="proj-ticker-wrap" key={filter}>
             <div className="proj-row">
               <div className="proj-track">
-                {trackA.map((p, i) => (
-                  <ProjectCard key={`${p.id}-a-${i}`} p={p} />
+                {trackA.map(({ p, dup }, i) => (
+                  <ProjectCard key={`${p.id}-a-${i}`} p={p} dup={dup} />
                 ))}
               </div>
             </div>
             {rowB.length > 0 && (
               <div className="proj-row rev">
                 <div className="proj-track">
-                  {trackB.map((p, i) => (
-                    <ProjectCard key={`${p.id}-b-${i}`} p={p} />
+                  {trackB.map(({ p, dup }, i) => (
+                    <ProjectCard key={`${p.id}-b-${i}`} p={p} dup={dup} />
                   ))}
                 </div>
               </div>

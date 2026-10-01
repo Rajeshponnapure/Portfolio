@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 /** Core Web Vitals monitoring */
 export function useWebVitals() {
   useEffect(() => {
+    // Diagnostics are dev-only; production visitors shouldn't pay for five observers.
+    if (!import.meta.env.DEV) return;
     // Only run in browser
     if (typeof window === 'undefined') return;
 
@@ -109,6 +111,7 @@ export function useWebVitals() {
 /** Error boundary integration for error tracking */
 export function useErrorTracking() {
   useEffect(() => {
+    if (!import.meta.env.DEV) return;
     const handleError = (event: ErrorEvent) => {
       console.error('[Error]', event.message, event.filename, event.lineno, event.colno);
       // Send to error tracking service (Sentry, LogRocket, etc.)

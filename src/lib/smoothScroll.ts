@@ -4,9 +4,14 @@ let instance: Lenis | null = null;
 let rafId = 0;
 
 /** Buttery inertial scroll (Lenis). Created once for the whole app. */
-export function initSmoothScroll(): Lenis {
+export function initSmoothScroll(): Lenis | null {
+  const coarse = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (coarse || reduced) return null;
   if (instance) return instance;
   instance = new Lenis({
+    // Touch devices keep native momentum scrolling (Lenis would fight it and add input lag).
+    syncTouch: false,
     duration: 1.15,
     easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,

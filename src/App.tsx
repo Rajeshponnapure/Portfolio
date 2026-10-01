@@ -1,8 +1,7 @@
 import { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useOs } from './store';
 import { Layout } from './components/Layout';
-import { initSmoothScroll, pauseSmoothScroll, resumeSmoothScroll } from './lib/smoothScroll';
+import { initSmoothScroll } from './lib/smoothScroll';
 import { useWebVitals, useErrorTracking } from './hooks/usePerformanceMonitoring';
 import { SkipLink, useFocusVisible, useReducedMotion } from './hooks/useAccessibility';
 
@@ -30,8 +29,6 @@ function LoadingFallback() {
 }
 
 function App() {
-  const { phase, login } = useOs();
-
   useWebVitals();
   useErrorTracking();
   useFocusVisible();
@@ -40,17 +37,6 @@ function App() {
   useEffect(() => {
     initSmoothScroll();
   }, []);
-
-  // Handle lock screen scroll - allow scrolling on home page for parallax
-  useEffect(() => {
-    if (phase === 'lock') {
-      document.body.style.overflow = '';
-      resumeSmoothScroll();
-    } else {
-      document.body.style.overflow = '';
-      resumeSmoothScroll();
-    }
-  }, [phase]);
 
   return (
     <BrowserRouter>

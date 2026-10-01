@@ -28,7 +28,7 @@
   --mx: 50%;
   --my: 42%;
   color-scheme: dark;
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: "Inter Variable", "Inter", system-ui, sans-serif;
   font-synthesis: none;
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
@@ -90,11 +90,11 @@ button { border: 0; padding: 0; color: inherit; background: transparent; font: i
 img { display: block; max-width: 100%; }
 h1, h2, h3, h4, p { margin: 0; }
 
-.mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+.mono { font-family: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace; }
 
 /* display headings */
 .name, .section-head h2, .boot-logo, h1, h2, h3 {
-  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-family: "Space Grotesk", "Inter Variable", "Inter", system-ui, sans-serif;
   letter-spacing: -0.015em;
 }
 
@@ -216,7 +216,7 @@ h1, h2, h3, h4, p { margin: 0; }
   color: #06070d;
   font-weight: 800;
   font-size: 14px;
-  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-family: "Space Grotesk", "Inter Variable", "Inter", system-ui, sans-serif;
   box-shadow: 0 4px 14px rgba(67, 224, 255, 0.4);
 }
 
@@ -565,7 +565,7 @@ main { position: relative; z-index: 2; }
   display: block;
   margin-bottom: 8px;
   color: var(--amber);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -808,7 +808,7 @@ main { position: relative; z-index: 2; }
   height: 58px;
   border-radius: 18px;
   color: #090b12;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
   font-weight: 800;
   font-size: 17px;
   background: rgba(255, 255, 255, 0.92);
@@ -966,7 +966,7 @@ main { position: relative; z-index: 2; }
   z-index: 2;
   margin-top: clamp(42px, 7vw, 82px);
   color: #fff;
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: "Inter Variable", "Inter", system-ui, sans-serif;
   font-size: clamp(44px, 6.3vw, 82px);
   font-weight: 400;
   line-height: 1;
@@ -1853,12 +1853,12 @@ main { position: relative; z-index: 2; }
   color: #06070d;
   font-weight: 800;
   font-size: 18px;
-  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-family: "Space Grotesk", "Inter Variable", "Inter", system-ui, sans-serif;
   box-shadow: 0 4px 16px rgba(67, 224, 255, 0.4);
 }
 
 .footer-name {
-  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-family: "Space Grotesk", "Inter Variable", "Inter", system-ui, sans-serif;
   font-weight: 700;
   font-size: clamp(18px, 2.2vw, 24px);
   letter-spacing: -0.02em;
@@ -1883,7 +1883,7 @@ main { position: relative; z-index: 2; }
 }
 
 .footer-heading {
-  font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  font-family: "Space Grotesk", "Inter Variable", "Inter", system-ui, sans-serif;
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.08em;
@@ -2043,4 +2043,32 @@ main { position: relative; z-index: 2; }
     min-width: 140px;
     justify-content: center;
   }
+}
+
+/* ---------- performance: lighter rendering on touch / small screens ---------- */
+.noise { display: none; }
+.proj-row, .rb-row { contain: layout paint; }
+.proj-card.dup { content-visibility: auto; }
+
+@media (hover: none), (pointer: coarse), (max-width: 900px) {
+  /* Full-screen blend layers and live blur are the costliest things a phone GPU composites. */
+  .scanlines { display: none; }
+  .bg-canvas { mix-blend-mode: normal; }
+  *, *::before, *::after { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  .rb-stage::before { animation: none; filter: blur(40px); opacity: 0.25; }
+  .hero-aura { filter: blur(40px); }
+
+  /* Project marquee becomes a native swipeable, snap-scrolling strip (no infinite animation). */
+  .proj-row { overflow-x: auto; -webkit-mask-image: none; mask-image: none; scroll-snap-type: x proximity; overscroll-behavior-x: contain; scrollbar-width: none; }
+  .proj-row::-webkit-scrollbar { display: none; }
+  .proj-track, .proj-row.rev .proj-track { animation: none; transform: none; padding-inline: 16px; }
+  .proj-ticker-wrap .proj-card { scroll-snap-align: center; width: min(300px, 82vw); flex-basis: min(300px, 82vw); }
+  .proj-card.dup { display: none; }
+  .proj-card::before, .proj-card::after { display: none; }
+  .focus-card, .tech-category-card { box-shadow: none !important; }
+}
+
+/* Don't burn cycles on marquees that are scrolled out of view. */
+@media (prefers-reduced-motion: reduce) {
+  .proj-track, .rb-track { animation: none !important; }
 }

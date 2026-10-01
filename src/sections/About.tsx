@@ -3,11 +3,11 @@ import { PROFILE } from '../data/content';
 import { RevealText } from '../components/RevealText';
 
 const TRAIL = [
-  '/portraits/me-1.png',
-  '/portraits/me-3.png',
-  '/portraits/me-4.png',
-  '/portraits/me-5.png',
-  '/portraits/Hero.png',
+  '/img/portraits/me-1-420.webp',
+  '/img/portraits/me-3-420.webp',
+  '/img/portraits/me-4-420.webp',
+  '/img/portraits/me-5-420.webp',
+  '/img/portraits/Hero-420.webp',
 ];
 
 /** Spawns a fading image at (x,y) inside the stage — the cursor image-trail effect. */

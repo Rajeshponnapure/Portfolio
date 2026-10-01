@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { PROFILE } from '../data/content';
 import { NavIcon } from './Icons';
 import { useReducedMotion } from '../hooks/useReducedMotion';
-import { HeroImage } from './OptimizedImage';
+import { Picture } from './OptimizedImage';
 
 const DISPLAY = 'P. GNANA RAJESWARA REDDY';
 
@@ -360,12 +360,7 @@ export function Lock() {
           <motion.div className="hero-float" animate={reducedMotion ? {} : { y: [0, -14, 0] }} transition={{ duration: 6.5, repeat: Infinity }}>
             <div className="hero-aura" aria-hidden="true" />
             <button className="hero-img-btn" onClick={handleLogin} aria-label="Open portfolio">
-              <HeroImage
-                srcBase="/optimized/portraits/Hero"
-                alt="Gnana Rajeswara Reddy"
-                className="hero-img"
-                draggable={false}
-              />
+              <Picture kind="portraits" name="Hero" width={840} height={840} sizes="(max-width: 560px) 80vw, 420px" priority alt="Gnana Rajeswara Reddy" className="hero-img" draggable={false} />
               <span className="hero-scan" aria-hidden="true" />
             </button>
           </motion.div>
