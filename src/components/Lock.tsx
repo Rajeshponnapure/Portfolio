@@ -3,9 +3,8 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue, type Transi
 import { useOs } from '../store';
 import { useNavigate } from 'react-router-dom';
 import { PROFILE } from '../data/content';
-import { NavIcon } from './Icons';
 import { useReducedMotion } from '../hooks/useReducedMotion';
-import { HeroImage } from './OptimizedImage';
+import { Picture } from './OptimizedImage';
 
 const DISPLAY = 'P. GNANA RAJESWARA REDDY';
 
@@ -20,8 +19,10 @@ function useTypewriter(words: readonly string[], typeMs = 65, deleteMs = 32, hol
     if (!del && text === word) {
       t = window.setTimeout(() => setDel(true), hold);
     } else if (del && text === '') {
-      setDel(false);
-      setWi((v) => v + 1);
+      t = window.setTimeout(() => {
+        setDel(false);
+        setWi((v) => v + 1);
+      }, 0);
     } else {
       t = window.setTimeout(() => {
         setText(word.slice(0, del ? text.length - 1 : text.length + 1));
@@ -289,7 +290,6 @@ export function Lock() {
   };
 
   const letterTransition = reducedMotion ? { duration: 0.01 } as Transition : { delay: 0, duration: 0.65 };
-  const floatTransition = reducedMotion ? { duration: 0.01 } as Transition : { duration: 6.5, repeat: Infinity };
 
   return (
     <section
@@ -319,13 +319,13 @@ export function Lock() {
           <motion.h1 className="reference-title hero-name" style={{ y: titleY, opacity: fade, rotateX: rx, rotateY: ry, transformPerspective: 1000 }}>
             <span className="title-kicker">Hi, I&apos;m</span>
             <span className="title-name">
-              {(() => {
-                let gi = 0;
-                return DISPLAY.split(' ').map((word, wi) => (
+              {DISPLAY.split(' ').map((word, wi, words) => {
+                // Letters before this word (plus the spaces removed by split) set the stagger offset.
+                const offset = words.slice(0, wi).reduce((n, w) => n + w.length, 0);
+                return (
                   <span className="title-word" key={wi}>
                     {word.split('').map((ch, ci) => {
-                      const delay = reducedMotion ? 0 : 0.25 + gi * 0.028;
-                      gi += 1;
+                      const delay = reducedMotion ? 0 : 0.25 + (offset + ci) * 0.028;
                       return (
                         <motion.span
                           className="title-letter"
@@ -339,8 +339,8 @@ export function Lock() {
                       );
                     })}
                   </span>
-                ));
-              })()}
+                );
+              })}
             </span>
           </motion.h1>
         </motion.div>
@@ -360,12 +360,7 @@ export function Lock() {
           <motion.div className="hero-float" animate={reducedMotion ? {} : { y: [0, -14, 0] }} transition={{ duration: 6.5, repeat: Infinity }}>
             <div className="hero-aura" aria-hidden="true" />
             <button className="hero-img-btn" onClick={handleLogin} aria-label="Open portfolio">
-              <HeroImage
-                srcBase="/optimized/portraits/Hero"
-                alt="Gnana Rajeswara Reddy"
-                className="hero-img"
-                draggable={false}
-              />
+              <Picture kind="portraits" name="Hero" width={840} height={840} sizes="(max-width: 560px) 80vw, 420px" priority alt="Gnana Rajeswara Reddy" className="hero-img" draggable={false} />
               <span className="hero-scan" aria-hidden="true" />
             </button>
           </motion.div>

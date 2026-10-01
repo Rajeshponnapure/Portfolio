@@ -7,7 +7,7 @@ import { BrandIcon } from '../components/Icons';
 import { Portal } from '../components/Portal';
 import { RevealText } from '../components/RevealText';
 
-const AVATAR = '/portraits/Hero.png';
+const AVATAR = '/img/portraits/Hero-420.webp';
 const REPOS = PROJECTS.slice(0, 5);
 
 export function Connect() {

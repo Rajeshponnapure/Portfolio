@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- loose prop types are fine for test mocks */
 import '@testing-library/jest-dom'
 import { vi } from 'vitest'
 

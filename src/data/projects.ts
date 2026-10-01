@@ -18,7 +18,7 @@ export const PROJECTS: Project[] = [
     obj: 'Run many coding agents in parallel',
     desc: 'Web-first command surface for orchestrating multiple coding agents simultaneously from one interface.',
     stack: ['React', 'Agents', 'Orchestration', 'WebSockets'],
-    image: '/projects/octogent.png',
+    image: 'octogent',
   },
   {
     id: 'AGT-04',
@@ -28,7 +28,7 @@ export const PROJECTS: Project[] = [
     obj: 'Local autonomous desktop assistant',
     desc: 'Windows-first local automation assistant with Tkinter UI, Ollama reasoning, voice I/O, browser automation and plugin workflows.',
     stack: ['Python', 'Ollama', 'Tkinter', 'Automation'],
-    image: '/projects/tom-desktop.png',
+    image: 'tom-desktop',
   },
   {
     id: 'AGT-05',
@@ -38,7 +38,7 @@ export const PROJECTS: Project[] = [
     obj: 'Trainable local-first assistant core',
     desc: 'Local-first assistant architecture with FastAPI, SQLite memory, RAG, safety checks, tool registry and Ollama-compatible inference.',
     stack: ['FastAPI', 'SQLite', 'RAG', 'Ollama'],
-    image: '/projects/tom-local-llm.png',
+    image: 'tom-local-llm',
   },
   {
     id: 'INT-01',
@@ -48,7 +48,7 @@ export const PROJECTS: Project[] = [
     obj: 'Track AI coding spend by task',
     desc: 'AI coding usage-analytics tool that tracks token spend by task, tool, model and project.',
     stack: ['Python', 'Analytics', 'Dashboards', 'LLM APIs'],
-    image: '/projects/codeburn.png',
+    image: 'codeburn',
   },
   {
     id: 'INT-02',
@@ -58,7 +58,7 @@ export const PROJECTS: Project[] = [
     obj: 'Knowledge graphs as project memory',
     desc: 'Knowledge-graph generator across code, docs, papers, images and video, built as queryable memory for AI coding assistants.',
     stack: ['Python', 'Graphs', 'RAG', 'Embeddings'],
-    image: '/projects/graphify.png',
+    image: 'graphify',
   },
   {
     id: 'AUT-06',
@@ -68,7 +68,7 @@ export const PROJECTS: Project[] = [
     obj: 'Email to Instagram content engine',
     desc: 'Local pipeline that reads AI-news emails, summarizes articles, generates carousel/report assets and prepares publishing output.',
     stack: ['Python', 'LLM', 'Automation', 'Asset Gen'],
-    image: '/projects/ai-instagram-news-agent.png',
+    image: 'ai-instagram-news-agent',
   },
   {
     id: 'AUT-07',
@@ -78,7 +78,7 @@ export const PROJECTS: Project[] = [
     obj: 'Autonomous tech intelligence digest',
     desc: 'Monitors RSS, blogs, GitHub releases and news, then generates daily PDF and email intelligence digests.',
     stack: ['Python', 'RSS', 'PDF', 'Scheduling'],
-    image: '/projects/ai-news-agent.png',
+    image: 'ai-news-agent',
   },
   {
     id: 'RTC-08',
@@ -88,7 +88,7 @@ export const PROJECTS: Project[] = [
     obj: 'Real-time messaging plus WebRTC calls',
     desc: 'Socket.io chat with WebRTC audio/video, file sharing, edit/delete, typing indicators, presence and emoji.',
     stack: ['Socket.io', 'WebRTC', 'React', 'Node'],
-    image: '/projects/chatapp.png',
+    image: 'chatapp',
   },
   {
     id: 'RTC-09',
@@ -98,7 +98,7 @@ export const PROJECTS: Project[] = [
     obj: 'Disguised secure messaging',
     desc: 'Flutter Sudoku game hiding identity-based secure messaging: friends, 1:1 chat, file sharing, WebRTC, biometrics and disguised notifications.',
     stack: ['Flutter', 'WebRTC', 'Biometrics', 'Crypto'],
-    image: '/projects/stealth-sudoku.png',
+    image: 'stealth-sudoku',
   },
   {
     id: 'FUL-10',
@@ -108,7 +108,7 @@ export const PROJECTS: Project[] = [
     obj: 'End-to-end registration platform',
     desc: 'Public course pages, authentication, protected profiles, registration flow, verification and success states.',
     stack: ['React', 'Node', 'Auth', 'DB'],
-    image: '/projects/course-registration.png',
+    image: 'course-registration',
   },
   {
     id: 'FUL-11',
@@ -118,7 +118,7 @@ export const PROJECTS: Project[] = [
     obj: 'Campus library portal',
     desc: 'Student/admin login, book search, profiles, admin dashboard, issue management and backend database.',
     stack: ['React', 'Node', 'SQL', 'Admin'],
-    image: '/projects/library-management.png',
+    image: 'library-management',
   },
   {
     id: 'IOT-12',
@@ -128,7 +128,7 @@ export const PROJECTS: Project[] = [
     obj: 'Traffic monitoring plus congestion scoring',
     desc: 'Traffic dashboard with junction status, congestion scoring, citizen reports, image upload/compression and incident tracking.',
     stack: ['React', 'Computer Vision', 'Node', 'Edge'],
-    image: '/projects/trafficai.png',
+    image: 'trafficai',
   },
   {
     id: 'IOT-13',
@@ -138,7 +138,7 @@ export const PROJECTS: Project[] = [
     obj: 'Traffic management variant',
     desc: 'React + Node traffic platform with authentication, citizen reporting, junction data and incident workflows.',
     stack: ['React', 'Node', 'Auth', 'Telemetry'],
-    image: '/projects/traffictide.png',
+    image: 'traffictide',
   },
   {
     id: 'FUL-14',
@@ -148,7 +148,7 @@ export const PROJECTS: Project[] = [
     obj: 'Interactive globe weather app',
     desc: 'React + Three.js weather app with interactive globe, GPS lookup, city search, OpenWeatherMap and animated premium UI.',
     stack: ['React', 'Three.js', 'WebGL', 'APIs'],
-    image: '/projects/3d-globe-weather.png',
+    image: '3d-globe-weather',
   },
   {
     id: 'FUL-15',
@@ -158,7 +158,7 @@ export const PROJECTS: Project[] = [
     obj: 'NGO operations platform',
     desc: 'MERN platform for Razorpay donations, 80G receipts, volunteer portal, admin/content management, transparency portal and secure APIs.',
     stack: ['MERN', 'Razorpay', 'Admin', 'APIs'],
-    image: '/projects/skm-trust-ngo.png',
+    image: 'skm-trust-ngo',
   },
   {
     id: 'FUL-16',
@@ -168,7 +168,7 @@ export const PROJECTS: Project[] = [
     obj: 'Production consulting platform',
     desc: 'Public site, client portal, admin CRM, NestJS API, payments, notifications and post-purchase support.',
     stack: ['Next.js', 'NestJS', 'Payments', 'CRM'],
-    image: '/projects/unity-consult.png',
+    image: 'unity-consult',
   },
   {
     id: 'FUL-17',
@@ -178,7 +178,7 @@ export const PROJECTS: Project[] = [
     obj: 'Training academy website',
     desc: 'React/Vite academy with course and blog pages, certificate verification, legal pages, theming, smooth scroll and premium motion.',
     stack: ['React', 'Vite', 'Motion', 'SEO'],
-    image: '/projects/tsda.png',
+    image: 'tsda',
   },
   {
     id: 'FUL-18',
@@ -188,7 +188,7 @@ export const PROJECTS: Project[] = [
     obj: 'All-in-one services concept',
     desc: 'Product concept with PRD, prototype design, app-flow map, backend/database architecture and implementation roadmap.',
     stack: ['PRD', 'Architecture', 'Design', 'Roadmap'],
-    image: '/projects/my360.png',
+    image: 'my360',
   },
 ];
 

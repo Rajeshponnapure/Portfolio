@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 /** Core Web Vitals monitoring */
 export function useWebVitals() {
   useEffect(() => {
+    // Diagnostics are dev-only; production visitors shouldn't pay for five observers.
+    if (!import.meta.env.DEV) return;
     // Only run in browser
     if (typeof window === 'undefined') return;
 
@@ -18,7 +20,7 @@ export function useWebVitals() {
           }
         });
         lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
-      } catch (e) {
+      } catch {
         // LCP not supported
       }
 
@@ -32,7 +34,7 @@ export function useWebVitals() {
           });
         });
         fidObserver.observe({ type: 'first-input', buffered: true });
-      } catch (e) {
+      } catch {
         // FID not supported
       }
 
@@ -49,7 +51,7 @@ export function useWebVitals() {
           console.log('[CLS]', clsValue.toFixed(4));
         });
         clsObserver.observe({ type: 'layout-shift', buffered: true });
-      } catch (e) {
+      } catch {
         // CLS not supported
       }
 
@@ -65,7 +67,7 @@ export function useWebVitals() {
           });
         });
         navObserver.observe({ type: 'navigation', buffered: true });
-      } catch (e) {
+      } catch {
         // Navigation timing not supported
       }
     }
@@ -81,7 +83,7 @@ export function useWebVitals() {
         });
       });
       longTaskObserver.observe({ type: 'longtask', buffered: true });
-    } catch (e) {
+    } catch {
       // Long tasks not supported
     }
 
@@ -109,6 +111,7 @@ export function useWebVitals() {
 /** Error boundary integration for error tracking */
 export function useErrorTracking() {
   useEffect(() => {
+    if (!import.meta.env.DEV) return;
     const handleError = (event: ErrorEvent) => {
       console.error('[Error]', event.message, event.filename, event.lineno, event.colno);
       // Send to error tracking service (Sentry, LogRocket, etc.)
@@ -149,7 +152,7 @@ export function usePerformanceMarks() {
         if (entries.length > 0) {
           console.log(`[Measure] ${name}:`, Math.round(entries[entries.length - 1].duration), 'ms');
         }
-      } catch (e) {
+      } catch {
         // Measure failed
       }
     }

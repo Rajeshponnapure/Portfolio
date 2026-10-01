@@ -3,13 +3,13 @@ import { test, expect } from '@playwright/test'
 test.describe('Portfolio', () => {
   test('home page loads and shows hero section', async ({ page }) => {
     await page.goto('/')
-    await expect(page.locator('text=Rajesh')).toBeVisible()
-    await expect(page.locator('text=AI Engineer')).toBeVisible()
+    await expect(page.locator('.hero-name')).toContainText('RAJESWARA')
+    await expect(page.locator('.hero-img')).toBeVisible()
   })
 
   test('navigation works', async ({ page }) => {
     await page.goto('/')
-    await page.click('text=Projects')
+    await page.getByRole('button', { name: 'Projects', exact: true }).click()
     await expect(page).toHaveURL(/.*projects/)
     await expect(page.locator('text=Mission Manifest')).toBeVisible()
   })
@@ -27,6 +27,6 @@ test.describe('Portfolio', () => {
     await page.goto('/')
     // Animations should be disabled
     const heroFloat = page.locator('.hero-float')
-    await expect(heroFloat).toHaveCSS('animation', 'none')
+    await expect(heroFloat).toHaveCSS('animation-name', 'none')
   })
 })
